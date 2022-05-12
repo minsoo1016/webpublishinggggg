@@ -1,23 +1,368 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF=8">
-        <title>앵커</title>
-        <!--style정리-->
         <style>
-           header {width: 100%;height: 15%;background-color: black;color: yellow;text-align: center;font-size: 500%;}
-           nav {width: 100%;height: 5%;background-color: red;text-align: center;font-size: 500%;}
-           section {width: 80%;height: 70%;float: left;background-color: red;text-align: center;font-size: 500%;}
-           aside {width: 20%;height: 70%;float: left;background-color: red;text-align: center;font-size: 500%;}
-           footer {width: 100%;height: 10%;clear: both;background-color: yellow;color: red;text-align: center;font-size: 500%;}
-           html, body {margin: 0;padding: 0;height: 100%;font-family: noto-sans;font-weight: 600;}
+            /* 초기화 */
+            * { 
+                margin: 0; padding: 0;
+                font-family: '나눔고딕'
+            }
+            a { text-decoration: none; }
+            li { list-style: none; }
+        /* 기본 클래스 */
+            .pull-left { float: left; }
+            .pull-right { float:right; }
+    
+        /* 페이지 */
+            body {
+                width: 960px; margin: 0 auto;
+                background: black
+            }
+    
+            #page-wrapper {
+                background: white;
+                margin: 40px 0; padding: 10px 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+            }
+        /* 헤더 */
+            #main-header { padding: 40px 50px; }
+            .master-title { 
+                font-family: jalnan;
+                font-size: 50px; 
+                color: black;
+                background-color: aquamarine;
+            }
+            .master-description {
+                font-family: santana;
+                font-size: 20px; font-weight: 500;
+                color: #e90a0aef;
+                background-color: yellow;
+            }
+            .list {font-size: 20px;font-family: '바른 바탕체';}
+    
+        /* 네비게이션 */
+    
+            #main-navigation {
+                border-top: 1px solid #C8C8C8;
+                border-bottom: 1px solid #C8C8C8;
+                margin-bottom: 20px;
+                height: 40px;
+            }
+            
+            .outer-menu-item {
+                float: left;
+                position: relative;
+                font-family: 나눔스퀘어;
+            }
+            .outer-menu-item:hover {
+                background: black;
+                color: white
+            }
+    
+            .menu-title {
+                display: block;
+                height: 30px; line-height: 30px;
+                text-align: center;
+                padding: 5px 20px;
+            }
+    
+            .inner-menu {
+                display: none;
+                position: absolute;
+                top: 40px; left: 0;
+                width: 100%;
+    
+                background: white;
+                box-shadow: 0 2px 6px rgba(5, 5, 5, 0.9);
+                z-index: 1000;
+    
+                text-align: center
+            }
+    
+            .inner-menu-item > a {
+                display: block;
+                padding: 5px 10px;
+                color: black
+            }
+    
+            .inner-menu-item > a:hover {
+                background: black;
+                color: white;
+            }
+    
+        /* 네비게이션 내부의 검색 */
+    
+            .search-bar {
+                height: 26px;
+                padding: 7px;
+            }
+            .input-search {
+                display: block;
+                float: left;
+    
+                background-color: #FFFFFF;
+                border: 1px solid #CCCCCC;
+                border-radius: 15px 0 0 15px;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    
+                width: 120px; height: 24px;
+                padding: 0 0 0 10px;
+                font-size: 12px;
+                color: #555555;
+            }
+    
+            .input-search:focus {
+                border-color: rgba(82, 168, 236, 0.8);
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            }
+    
+            .input-search-submit {
+                display: block;
+                float: left;
+    
+                width: 50px; height: 26px;
+                border-radius: 0 15px 15px 0;
+                border: 1px solid #CCCCCC;
+    
+                margin-left: -1px;
+    
+                vertical-align: top;
+                display: inline-block;
+            }
+    
+        /* 중앙  */
+    
+            /* body 태그의 너비: 960픽셀 */
+            /* #page-wrapper 태그의 padding 속성으로 내용물 너비는 920픽셀 */
+            #content { overflow: hidden; }
+            #main-section {
+                float: left;
+                width: 710px;
+            }
+            #main-aside {
+                float: right;
+                width: 200px;
+            }
+    
+        /* 좌측  */
+
+            article { 
+                padding: 0 10px 20px 10px;
+                border-bottom: 1px solid #C8C8C8;
+            }
+    
+            .article-header { padding: 5px 0; }
+            .article-title { 
+                font-family: 윤고딕310;
+                font-size: 30px;
+                font-weight: 500; 
+                padding-bottom: 10px;
+            }
+            .article-date { font-size: 13px; }
+            .article-body {
+                font-family: impact;
+                font-size: 16px;
+            }
+    
+        /* 우측  */
+    
+            .aside-list { padding: 10px 0 30px 0; }
+            .aside-list > h3 {
+                font-family: 나눔스퀘어;
+                font-size: 20px;
+                font-weight: 600;
+            }
+            .aside-list li a {
+                font-family: 나눔스퀘어;
+                margin-left: 8px;
+                font-size: 15px;
+                color: #6C6C6C;
+            }
+            table,td {font-family: Noto Sans KR; font-size: 20px;;border: 2px solid black;margin-top: 5%;text-align: center;background-color: green;color: aliceblue;}
+            th {border: 2px solid black;font-size: 30px;}
+            caption {font-family: 배달의민족 주아; font-size: 40px;background-color: red;color: yellow;}
+            .imp {background-color: black;color: floralwhite;font-size: 30px;}
+            .room {font-size: 15px;}
+            .A {font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
         </style>
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+         <script>
+             $(document).ready(function () {
+                 $('.outer-menu-item').hover(function () {
+                     $(this).find('.inner-menu').show();
+                 }, function () {
+                     $(this).find('.inner-menu').hide();
+                 });
+             });
+         </script>
     </head>
-<body>
-   <header class="header">header</header>
-   <nav class="nav">nav</nav>
-   <section class="section">section</section>
-   <aside class="aside">aside</aside>
-   <footer class="footer">footer</footer>
-</body>
+
+    <body>
+        <div id="page-wrapper">
+                <header id="main-header"> <hgroup><h1 class="master-title">일기</h1><br><h2 class="master-description">Diary</h2> </hgroup></header>
+                <nav id="main-navigation"> <div class="pull-left">
+                    <ul class="outer-menu">
+                        <li class="outer-menu-item">
+                            <span class="menu-title">일하는 휴일</span>
+                            <ul class="inner-menu">
+                                <li class="inner-menu-item"><a href="#A" target="_blank">월</a></li>
+                                <li class="inner-menu-item"><a href="#A">화</a></li>
+                                <li class="inner-menu-item"><a href="#A">수</a></li>
+                                <li class="inner-menu-item"><a href="#A">목</a></li>
+                                <li class="inner-menu-item"><a href="#A">금</a></li>
+                            </ul>
+                        </li>
+                        <li class="outer-menu-item">
+                            <span class="menu-title">쉬는 휴일</span>
+                            <ul class="inner-menu">
+                                <li class="inner-menu-item"><a href="#B" target="_blank">토</a></li>
+                                <li class="inner-menu-item"><a href="#B">일</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <div class="search-bar">
+                        <form>
+                            <input type="text" class="input-search" />
+                            <input type="submit" class="input-search-submit" value="검색"/>
+                        </form>
+                    </div>
+                </div></nav>
+                <div id="content">
+                    <section id="main-section"><article>
+                        <div class="article-header">
+                            <h3>
+                            <ul>
+                                <li><a href="#A">반복되는 주말의 일기</a></li>
+                                <br>
+                                <li><a href="#B">주말에 술 먹은 날</a></li>
+                                <br>
+                            </ul></h3>
+                            <br>
+                            <hr>
+                            <br>
+                            <h1 class="article-title" id="A">반복되는 주말의 일기</h1>
+                            <p class="article-date">Again</p>
+                        </div>
+                        <div class="article-body">
+                            <img src="중국집.jpg" width="500px" >
+                            <br />
+                            <br />
+                            <p><h2 onmouseover="show()" onmouseout="hide()">나는 주말마다 중국집으로 11시마다 아르바이트에 간다.</h2>
+                                그래서 나에겐 주말이 주말이 아니다.<br>
+                               그래서 알바를 끝내고 집에오면 낮잠(?)을 1~2시간잔다.<br>
+                                그러면서 과제등을 하면 내일 출근을 걱정한다.....<br>
+                                <img src="잠.gif" alt=""> 
+                                <img src="5.png" alt=""> </p>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="article-header">
+                            <h1 class="article-title" id="B">주말에 술 먹은 날</h1>
+                            <p class="article-date">Weekend</p>
+                        </div>
+                        <div class="article-body">
+                            <img src="주다방.jpg" width="500px"/>
+                            <br />
+                            <br />
+                            <p>저번주에 애들끼리 만나 술집에 갔다.3차 까지 갔었는데 중간에 토하거나 정신을 잃는애도 있었다.그런 애들은 부모님에게 전달해주었다.</p>
+                            <br />
+                            <p>3차 결제는 옆 테이블의 모르는 형님이 해주었는데 누군지 모르겠지만 참 감사했다.</p>
+                        </div>
+                    </article>
+                    <article>
+                    <br>
+                    마지막은 제가 요즘 즐겨듣는 노래 링크를 넣을려했는데....왜인지 재생이 안되네요 사이트에서 ㅠㅠ
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LIIDh-qI9oI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </article>
+                    </section>
+                    <aside id="main-aside"><div class="aside-list">
+                        <h3>좋아하는것</h3>
+                        <br>
+                        <ul>
+                            <li><a href="#">초코</a></li>
+                            <li><a href="#">놀기</a></li>
+                        </ul>
+                    </div>
+                    <div class="aside-list">
+                        <h3>싫어하는것</h3>
+                        <br>
+                        <ul>
+                            <li><a href="#">과제</a></li>
+                            <li><a href="#">노동</a></li>
+                        </ul>
+                    </div></aside>
+                </div>
+                <footer id="main-footer"><a href="https://www.mjc.ac.kr/mjcIntro.do">From Sung Minsoo</a></footer>
+                <table>
+                    <caption>민수의 시간표</caption>
+                    <thead>
+                    <tr>
+                        <th><p class="A">시간&#x005c;날짜</p></th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td rowspan="3">레이아웃 디자인<br><p class="room">예201</p></td>
+                        <td rowspan="3">타이포그라피1<br><p class="room">예201</p></td>
+                        <td rowspan="2">성경과삶<br><p class="room">비대면</p></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td></td>
+                        <td></td>
+                        <td>인성채플<br><p class="room">비대면</p></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td rowspan="3">기초일러스트레이션<br><p class="room">예202</p></td>
+                        <td rowspan="3">영크리에이터<br><p class="room">예215</p></td>
+                        <td></td>
+                        <td rowspan="3"><p class="imp">★웹퍼블리싱★<br>예205</p></td>
+                        <td rowspan="3">창의적디자인아이디어<br><p class="room">예215</p></td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>생활영어<br><p class="room">비대면</p></td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+    </body>
 </html>
